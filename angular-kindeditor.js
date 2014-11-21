@@ -34,7 +34,7 @@
                         width: '100%'
                     };
                     var editorId = elm[0];
-                    var editorConfig = scope.config ? scope.config : _config;
+                    var editorConfig = scope.config || _config;
                     editorConfig.afterChange = function () {
                         if (!scope.$$phase) {
                             ctrl.$setViewValue(this.html());
@@ -45,7 +45,7 @@
                          K.create(editorId,editorConfig);
                     });
                     ctrl.$parsers.push(function (viewValue) {
-                        ctrl.$setValidity('fbcpssb', viewValue);
+                        ctrl.$setValidity('keditor', viewValue);
                         return viewValue;
                     });
                 }
