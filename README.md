@@ -7,7 +7,7 @@ The goal is to use kindeditor whit angular easier
 Demo
 ==================
 
-no one
+[http://zedwang.github.io/angular-kindeditor](http://zedwang.github.io/angular-kindeditor)
 
 Installation
 ==================
