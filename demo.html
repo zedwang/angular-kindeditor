@@ -1,0 +1,44 @@
+<!--
+@license AngularJS v1.2.9
+(c) 2010-2014 Google, Inc. http://angularjs.org
+ License: MIT
+Created by Zed on 19-11-2014.
+-->
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angular整合kindeditor富文本编辑器demo</title>
+    <script src="../angular.min.js"></script>
+    <script src="kindeditor/kindeditor-all-min.js"></script>
+    <script src="kindeditor/lang/zh-CN.js"></script>
+    <script src="angular-kindeditor.js"></script>
+    <style>
+        .right {
+            color: #008000;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body data-ng-app="demoApp" ng-controller="kindeditorCtrl">
+<div style="width: 80%; margin: 0 auto">
+    <form action="" name="myForm">
+        <textarea keditor ng-model="content" data-config="config" cols="30" rows="10" required></textarea>
+    </form>
+    <p><span style="color: red">ng-model:</span>{{content}}</p>
+    <p><span style="color: #ff0000">必填项myForm.$valid:</span>{{myForm.$valid}} </p>
+    <p ng-hide="myForm.$valid" class="error">验证不通过！</p>
+    <p ng-show="myForm.$valid" class="right">验证通过！</p>
+</div>
+
+</body>
+<script>
+    var app = angular.module("demoApp",['ngKeditor']);
+    app.controller("kindeditorCtrl",["$scope",function($scope){
+        $scope.content = "hello,world"
+        $scope.config = {width: '100px'};
+    }]);
+</script>
+</html>
