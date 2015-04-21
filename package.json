@@ -1,0 +1,29 @@
+{
+  "name": "angular-kindeditor",
+  "version": "1.0.0",
+  "description": "Angular port for kindeditor",
+  "main": "angular-kindeditor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zedwang/angular-kindeditor.git"
+  },
+  "keywords": [
+    "angular",
+    "kindeditor"
+  ],
+  "author": "Zed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zedwang/angular-kindeditor/issues"
+  },
+  "homepage": "https://github.com/zedwang/angular-kindeditor",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-uglify": "^0.9.1"
+  }
+}
