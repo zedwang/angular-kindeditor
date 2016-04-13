@@ -28,7 +28,7 @@ var app = angular.module("demoApp",['ngKeditor']);
 因为我们的插件是继承ngmodel的，所以我们必须要绑定model，然后写上我们以class命名的指令
 
 ```javascript
-<div class="keditor" ng-model="content"></div>
+<div keditor ng-model="content" data-config="config"></div>
 ```
 如果要自定义配置，按照下面的格式做就OK了
 
