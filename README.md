@@ -33,7 +33,7 @@ var app = angular.module("demoApp",['ngKeditor']);
 如果要自定义配置，按照下面的格式做就OK了
 
 ```javascript
-<div class="keditor" ng-model="content" data-config="config"></div>
+<div keditor ng-model="content" data-config="config"></div>
 
 <script>
     $scope.config = {
