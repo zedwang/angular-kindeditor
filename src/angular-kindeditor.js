@@ -13,6 +13,7 @@
 
             var linkFn = function (scope, elm, attr, ctrl) {
 
+
                 if (typeof KindEditor === 'undefined') {
                     console.error('Please import the local resources of kindeditor!');
                     return;
@@ -25,9 +26,7 @@
                         this.loadPlugin('autoheight');
                     }
                 };
-
-                var editorId = elm[0],
-                    editorConfig = scope.config || _config;
+                var editorId = elm[0], editorConfig = scope.config || _config;
 
                 editorConfig.afterChange = function () {
                     if (!scope.$$phase) {
@@ -37,8 +36,20 @@
                     }
                 };
 
+
                 if (KindEditor) {
-                    KindEditor.create(editorId, editorConfig);
+                    var editor = KindEditor.create(editorId, editorConfig);
+                    console.log("model value: "+ctrl.$modelValue);
+                    var flag = 2;
+                    scope.$watch(function () {
+                        return ctrl.$modelValue;
+                    }, function(newValue) {
+                        if(flag>0) {
+                            console.log("new value: " + newValue);
+                            editor.html(newValue);
+                            flag--;
+                        }
+                    });
                 }
 
                 ctrl.$parsers.push(function (viewValue) {
@@ -49,7 +60,7 @@
 
             return {
                 require: 'ngModel',
-                scope: { config: '=config' },
+                scope: { config: '=config'},
                 link: linkFn
             };
         });
