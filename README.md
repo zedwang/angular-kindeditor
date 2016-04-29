@@ -2,12 +2,28 @@ angular-kindeditor
 ==================
 angular-kindeditor是整合kindeditor的富文本编辑器插件，我们在项目中可以随处使用，非常方便
 
+修复日志:
+1,初始化不显示内容
+2,灵活定制验证规则
+3,修复自定义配置项
+4,使用类型为```class```,```attr```
+5,已结引入项目的同学,构建后可直接覆盖,不会引起兼容问题
+
 Demo
 ==================
 
 [http://zedwang.github.io/angular-kindeditor](http://zedwang.github.io/angular-kindeditor)
-github的演示页面一直有问题，可以看下面的这个链接
 [demo](http://www.w3cscript.com/Angular/2014-11-26/14.html)
+构建
+===
+第一步:
+```javascript
+    ~ npm install
+```
+第二步:
+```javascript
+    ~ grunt
+```
 准备
 ==================
 先引入kindeditor的配置文件
@@ -37,8 +53,18 @@ var app = angular.module("demoApp",['ngKeditor']);
 
 <script>
     $scope.config = {
-        ...
+        width:'100px'
     }
+
 </script>
 ```
-结语：工程不大，但是很有用。之前一直用别人的，算是回馈了大家！有什么问题大家可以fork
+
+```javascript
+<div keditor ng-model="content" data-pattern="reg"></div>
+
+<script>
+    $scope.reg = /\d+/g;
+    // input 123/hello
+    // output true/false;
+</script>
+```

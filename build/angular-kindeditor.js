@@ -13,7 +13,7 @@
 
             var linkFn = function (scope, elm, attr, ctrl) {
 
-                if (typeof KindEditor === 'undefined') {
+                if (typeof window.KindEditor === 'undefined') {
                     console.error('Please import the local resources of kindeditor!');
                     return;
                 }
@@ -27,29 +27,40 @@
                 };
 
                 var editorId = elm[0],
-                    editorConfig = scope.config || _config;
+                    editorConfig = angular.extend(_config,scope.config);
 
                 editorConfig.afterChange = function () {
                     if (!scope.$$phase) {
                         ctrl.$setViewValue(this.html());
-                        // exception happens here when angular is 1.2.28
-                        // scope.$apply();
                     }
+                    scope.$apply();
                 };
 
-                if (KindEditor) {
-                    KindEditor.create(editorId, editorConfig);
+                if (window.KindEditor) {
+                    window.KindEditor.ready(function (k) {
+                        k.create(editorId, editorConfig);
+                    })
                 }
-
+                // 验证合法性
+                var regObj = scope.pattern ? new RegExp(scope.pattern) : false;
                 ctrl.$parsers.push(function (viewValue) {
-                    ctrl.$setValidity('keditor', viewValue);
-                    return viewValue;
+                    if (regObj) {
+
+                        regObj.test(viewValue) ? ctrl.$setValidity('nk',true) :  ctrl.$setValidity('nk',false);
+
+                        return viewValue;
+                    }
+
                 });
             };
 
             return {
+                restrict:'AC',
                 require: 'ngModel',
-                scope: { config: '=config' },
+                scope: {
+                    config: '=',
+                    pattern:'='
+                },
                 link: linkFn
             };
         });
