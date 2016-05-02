@@ -1,18 +1,27 @@
 angular-kindeditor
 ==================
+
 angular-kindeditor是整合kindeditor的富文本编辑器插件，我们在项目中可以随处使用，非常方便
 
+兼容angular<1.3.x版本
+
 修复日志:
+
 1,初始化不显示内容
+
 2,灵活定制验证规则
+
 3,修复自定义配置项
+
 4,使用类型为```class```,```attr```
+
 5,已结引入项目的同学,构建后可直接覆盖,不会引起兼容问题
 
 Demo
 ==================
 
 [http://zedwang.github.io/angular-kindeditor](http://zedwang.github.io/angular-kindeditor)
+
 [demo](http://www.w3cscript.com/Angular/2014-11-26/14.html)
 构建
 ===
