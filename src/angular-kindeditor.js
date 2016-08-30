@@ -9,7 +9,7 @@
 
     angular
         .module('ngKeditor', [])
-        .directive('keditor', function () {
+        .directive('keditor', function ($rootScope) {
 
             var linkFn = function (scope, elm, attr, ctrl) {
 
@@ -30,10 +30,11 @@
                     editorConfig = angular.extend(_config,scope.config);
 
                 editorConfig.afterChange = function () {
-                    if (!scope.$$phase) {
-                        ctrl.$setViewValue(this.html());
-                    }
-                    scope.$apply();
+                    var that = this;
+                    scope.$apply(function () {
+                        ctrl.$setViewValue(that.html());
+                    })
+                    scope.$digest()
                 };
 
                 if (window.KindEditor) {
