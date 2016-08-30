@@ -1,4 +1,4 @@
-angular-kindeditor
+#angular-kindeditor
 ==================
 
 angular-kindeditor是整合kindeditor的富文本编辑器插件，我们在项目中可以随处使用，非常方便
@@ -17,12 +17,16 @@ angular-kindeditor是整合kindeditor的富文本编辑器插件，我们在项�
 
 5,已结引入项目的同学,构建后可直接覆盖,不会引起兼容问题
 
-Demo
+#Demo
 ==================
 
 [http://zedwang.github.io/angular-kindeditor](http://zedwang.github.io/angular-kindeditor)
 
 [demo](http://www.w3cscript.com/Angular/2014-11-26/14.html)
+##Install
+```js
+$ bower install ngKeditor
+```
 构建
 ===
 第一步:
