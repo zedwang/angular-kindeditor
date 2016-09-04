@@ -4,65 +4,70 @@
  * License: MIT
  * Created by Zed on 19-11-2014.
  */
-(function (window, angular) {
+(function () {
     'use strict';
 
     angular
         .module('ngKeditor', [])
-        .directive('keditor', function ($rootScope) {
+        .directive('keditor', function ($rootScope,$sce) {
 
             var linkFn = function (scope, elm, attr, ctrl) {
 
                 if (typeof window.KindEditor === 'undefined') {
-                    console.error('Please import the local resources of kindeditor!');
-                    return;
+                    throw new Error('Please import the local resources of kindeditor!');
                 }
+                var editor,
+                    editorId = elm[0],
+                    _config = {
+                        width: '100%',
+                        autoHeightMode: false,
+                        afterCreate: function () {
+                            this.loadPlugin('autoheight');
+                        },
+                        afterChange: function () {
+                            var content = this.html();
+                            if (isReady && editor) {
+                                scope.$evalAsync(function () {
+                                    ctrl.$setViewValue(content);
+                                })
 
-                var _config = {
-                    width: '100%',
-                    autoHeightMode: false,
-                    afterCreate: function () {
-                        this.loadPlugin('autoheight');
-                    }
-                };
+                            }
+                        }
 
-                var editorId = elm[0],
-                    editorConfig = angular.extend(_config,scope.config);
+                    },
+                    isReady = false,
+                    editorConfig = angular.extend(_config, scope.config);
 
-                editorConfig.afterChange = function () {
-                    var that = this;
-                    scope.$apply(function () {
-                        ctrl.$setViewValue(that.html());
-                    })
-                    scope.$digest()
-                };
+                editor = new KindEditor.create(editorId, editorConfig);
+                KindEditor.ready(function () {
+                    isReady = true;
+                    var _content = ctrl.$isEmpty(ctrl.$viewValue) ? "" : ctrl.$viewValue;
+                    editor.html(_content);
+                })
 
-                if (window.KindEditor) {
-                    window.KindEditor.ready(function (k) {
-                        k.create(editorId, editorConfig);
-                    })
-                }
-                // 验证合法性
+                // 匹配正则
                 var regObj = scope.pattern ? new RegExp(scope.pattern) : false;
-                ctrl.$parsers.push(function (viewValue) {
-                    if (regObj) {
+                if (regObj) {
+                    ctrl.$parsers.push(function (value) {
+                        if (regObj.test(value)) {
+                            ctrl.$setValidity(attr.ngModel,true)
+                        } else {
+                            ctrl.$setValidity(attr.ngModel,false)
+                        }
 
-                        regObj.test(viewValue) ? ctrl.$setValidity('nk',true) :  ctrl.$setValidity('nk',false);
+                    })
+                }
 
-                        return viewValue;
-                    }
-
-                });
             };
 
             return {
-                restrict:'AC',
-                require: 'ngModel',
+                restrict: 'AC',
+                require: '^ngModel',
                 scope: {
                     config: '=',
-                    pattern:'='
+                    pattern: '='
                 },
                 link: linkFn
             };
         });
-})(window, window.angular);
+}).call(this);
