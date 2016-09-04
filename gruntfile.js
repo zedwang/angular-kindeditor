@@ -6,7 +6,9 @@ module.exports = function(grunt) {
         clean: ['build'],
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \nauthor:<%= pkg.author%>*/\n'
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> ' +
+                '\nauthor:<%= pkg.author%>\n' +
+                'repository:<%= pkg.repository.url%>\n*/\n'
             },
             build: {
                 src: 'src/<%= pkg.name %>.js',
