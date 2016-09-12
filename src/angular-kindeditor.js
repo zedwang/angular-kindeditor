@@ -45,7 +45,7 @@
                     editor.html(_content);
                 })
 
-                // ∆•≈‰’˝‘Ú
+                // ÂåπÈÖçÊ≠£Âàô
                 var regObj = scope.pattern ? new RegExp(scope.pattern) : false;
                 if (regObj) {
                     ctrl.$parsers.push(function (value) {
@@ -58,6 +58,10 @@
                     })
                 }
 
+                scope.$watch('data', function(value) {
+                    if (value)
+                        editor.html(value);
+                });
             };
 
             return {
@@ -65,7 +69,8 @@
                 require: '^ngModel',
                 scope: {
                     config: '=',
-                    pattern: '='
+                    pattern: '=',
+                    data: "=ngModel"
                 },
                 link: linkFn
             };
