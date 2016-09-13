@@ -41,12 +41,15 @@ Created by Zed on 19-11-2014.
 
 <script>
     var app = angular.module("demoApp",['ngKeditor']);
-    app.controller("kindeditorCtrl",["$scope",function($scope){
-        console.log($scope);
-        console.log('==================')
-        $scope.info = {
-                content : "hello,world"
-        };
+    app.controller("kindeditorCtrl",["$scope","$interval",function($scope,$interval){
+        var count = 0;
+        $interval(function () {
+            count++;
+            $scope.info = {
+                content : count
+            };
+        },1000)
+
         $scope.config = {width: '100px'};
 
         $scope.reg = /^\d+/g;

@@ -45,7 +45,7 @@
                     editor.html(_content);
                 })
 
-                // Æ¥ÅäÕýÔò
+                // æ­£åˆ™
                 var regObj = scope.pattern ? new RegExp(scope.pattern) : false;
                 if (regObj) {
                     ctrl.$parsers.push(function (value) {
@@ -56,6 +56,13 @@
                         }
 
                     })
+                }
+
+                ctrl.$render = function () {
+                    if (isReady && editor) {
+                        var _content = ctrl.$isEmpty(ctrl.$viewValue) ? "" : ctrl.$viewValue;
+                        editor.html(_content);
+                    }
                 }
 
             };
