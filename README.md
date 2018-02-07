@@ -1,26 +1,23 @@
-#angular-kindeditor
-==================
+# angular-kindeditor
 
 angular-kindeditor是整合kindeditor的富文本编辑器插件，我们在项目中可以随处使用，非常方便
+> Note:仅兼容1.x
 
 
 修复日志:
+1. 解决高版本不兼容问题
+2. 解决初始化内容不显示问题
 
-1，解决高版本不兼容问题
-2，解决初始化内容不显示问题
-
-#Demo
-==================
+## Demo
 
 [http://zedwang.github.io/angular-kindeditor](http://zedwang.github.io/angular-kindeditor)
 
 [demo](http://www.w3cscript.com/Angular/2014-11-26/14.html)
-##Install
+## Install
 ```js
 $ bower install ngKeditor
 ```
-构建
-===
+## 构建
 第一步:
 ```javascript
     ~ npm install
@@ -29,8 +26,7 @@ $ bower install ngKeditor
 ```javascript
     ~ grunt
 ```
-准备
-==================
+## 准备
 先引入kindeditor的配置文件
 ```javascript
 <script src="kindeditor/kindeditor-all-min.js"></script>
@@ -44,8 +40,7 @@ $ bower install ngKeditor
 ```javascript
 var app = angular.module("demoApp",['ngKeditor']);
 ```
-使用
-==================
+## 使用
 因为我们的插件是继承ngmodel的，所以我们必须要绑定model，然后写上我们默认命名的指令
 
 ```javascript
